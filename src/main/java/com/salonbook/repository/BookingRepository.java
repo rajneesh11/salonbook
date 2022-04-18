@@ -19,4 +19,5 @@ public interface BookingRepository extends CrudRepository<Bookings, Integer> {
             "FROM Bookings b JOIN User u WHERE b.user = :id AND b.booked_date < :bookingDate")
     List<Bookings> findBookingsAsOld(int id, String bookingDate);
 
+//    For admin and user
 }
