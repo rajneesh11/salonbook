@@ -1,44 +1,24 @@
-package com.salonbook.entity;
+package com.salonbook.entity.dto;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
-import javax.persistence.*;
-
-@Entity
-@Table(name = "bookings")
-public class Bookings {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
+public class BookingUserDto {
     private int id;
     private String booked_date;
     private String job;
     private int slot;
     private String booked_on;
-    //    @Column(name = "user")//, insertable = false, updatable = false)
-//    private int userId;
     private int cancelled;
     private int job_served;
-    private String userName;
+    private String user;
 
-    @OneToOne
-    @JoinColumn(name = "user", insertable = false, updatable = false)
-    @Fetch(FetchMode.JOIN)
-    private User user;
-
-    public Bookings() {
-    }
-
-    public Bookings(int id, String booked_date, String job, int slot, String booked_on, String userName, int cancelled, int job_served) {
+    public BookingUserDto(int id, String booked_date, String job, int slot, String booked_on, String user, int cancelled, int job_served) {
         this.id = id;
         this.booked_date = booked_date;
         this.job = job;
         this.slot = slot;
         this.booked_on = booked_on;
-//        this.userId = userId;
         this.cancelled = cancelled;
         this.job_served = job_served;
-        this.userName = userName;
+        this.user = user;
     }
 
     public int getId() {
@@ -81,14 +61,6 @@ public class Bookings {
         this.booked_on = booked_on;
     }
 
-    /*public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-*/
     public int getCancelled() {
         return cancelled;
     }
@@ -105,26 +77,25 @@ public class Bookings {
         this.job_served = job_served;
     }
 
-    public User getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(String user) {
         this.user = user;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     @Override
     public String toString() {
-        return "id:" + this.id + ",booked_date:" + this.booked_date + ",job:" + this.job + ",slot:" + this.slot +
-                ",booked_on:" + this.booked_on + ",cancelled:" + this.cancelled + ",job_served:" + this.job_served +
-                ",user:" + this.userName;
+        return "BookingUserDto[" +
+                "id=" + id +
+                ", booked_date='" + booked_date + '\'' +
+                ", job='" + job + '\'' +
+                ", slot=" + slot +
+                ", booked_on='" + booked_on + '\'' +
+                ", cancelled=" + cancelled +
+                ", job_served=" + job_served +
+                ", user='" + user + '\'' +
+                ']';
     }
 }

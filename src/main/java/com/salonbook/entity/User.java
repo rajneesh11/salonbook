@@ -1,29 +1,33 @@
 package com.salonbook.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name = "user")
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-//    @Column(name = "id")
+    @Column(name = "id")
     private int id;
     private String name;
     private String address;
     private String email;
     private String password;
 
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
+    private Bookings bookings;
 
     public User() {
     }
 
-    public User(int id, String name, String address, String email, String password) {
+    /*public User(int id, String name, String address, String email, String password) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.email = email;
         this.password = password;
-    }
+    }*/
 
     public int getId() {
         return id;
@@ -63,5 +67,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Bookings getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(Bookings bookings) {
+        this.bookings = bookings;
     }
 }

@@ -1,6 +1,6 @@
 package com.salonbook.service;
 
-import com.salonbook.entity.Bookings;
+import com.salonbook.entity.dto.BookingUserDto;
 import com.salonbook.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class BookingServiceImpl implements BookingService{
     }
 
     @Override
-    public List<Bookings> retrieveBookings(String bookingsData) {
-        return null;
+    public List<BookingUserDto> retrieveBookings(int id, String todayDate) {
+        return bookingRepository.findOldBookingsByUser(id, todayDate);
     }
 }
