@@ -4,6 +4,8 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Entity
 @Table(name = "bookings")
@@ -14,12 +16,11 @@ public class Bookings {
     private String booked_date;
     private String job;
     private int slot;
-    private String booked_on;
-    //    @Column(name = "user")//, insertable = false, updatable = false)
-//    private int userId;
-    private int cancelled;
-    private int job_served;
-    private String userName;
+    private String booked_on = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());;
+    @Column(name = "user")
+    private int userId;
+    private int cancelled = 0;
+    private int job_served = 0;
 
     @OneToOne
     @JoinColumn(name = "user", insertable = false, updatable = false)
@@ -29,16 +30,22 @@ public class Bookings {
     public Bookings() {
     }
 
-    public Bookings(int id, String booked_date, String job, int slot, String booked_on, String userName, int cancelled, int job_served) {
+    public Bookings(String booked_date, String job, int slot, int userId) {
+        this.booked_date = booked_date;
+        this.job = job;
+        this.slot = slot;
+        this.userId = userId;
+    }
+
+    public Bookings(int id, String booked_date, String job, int slot, String booked_on, int userId, int cancelled, int job_served) {
         this.id = id;
         this.booked_date = booked_date;
         this.job = job;
         this.slot = slot;
         this.booked_on = booked_on;
-//        this.userId = userId;
+        this.userId = userId;
         this.cancelled = cancelled;
         this.job_served = job_served;
-        this.userName = userName;
     }
 
     public int getId() {
@@ -81,14 +88,14 @@ public class Bookings {
         this.booked_on = booked_on;
     }
 
-    /*public int getUserId() {
+    public int getUserId() {
         return userId;
     }
 
     public void setUserId(int userId) {
         this.userId = userId;
     }
-*/
+
     public int getCancelled() {
         return cancelled;
     }
@@ -113,7 +120,7 @@ public class Bookings {
         this.user = user;
     }
 
-    public String getUserName() {
+    /*public String getUserName() {
         return userName;
     }
 
@@ -126,5 +133,5 @@ public class Bookings {
         return "id:" + this.id + ",booked_date:" + this.booked_date + ",job:" + this.job + ",slot:" + this.slot +
                 ",booked_on:" + this.booked_on + ",cancelled:" + this.cancelled + ",job_served:" + this.job_served +
                 ",user:" + this.userName;
-    }
+    }*/
 }
